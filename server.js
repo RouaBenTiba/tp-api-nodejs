@@ -1,7 +1,7 @@
 // ============================================
 // IMPORTS
 // ============================================
-// Branche A : Serveur Express principal
+// Branche B : Application Express
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/database");
@@ -59,6 +59,14 @@ app.use((req, res) => {
   res.status(404).json({
     success: false,
     message: `Route ${req.originalUrl} non trouvée`,
+  });
+});
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
   });
 });
 
